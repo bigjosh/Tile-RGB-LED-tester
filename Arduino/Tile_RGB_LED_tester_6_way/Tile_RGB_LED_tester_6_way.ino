@@ -12,6 +12,9 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+
+  
+
   setAllRGB(0,0,0);     // CLS
     
   // Flip though fundemental colors, full screen,  1 seconds each
@@ -130,6 +133,46 @@ void loop() {
     delay(2);
   }
   
+// Rotating blue wave effect
+
+  for( int a=0; a<100; a+=1 ) {     // Angle though 100 steps
+
+    for( int w=0; w<100; w++) {   // Steps in each Wave 
+
+      // Imagine the wave going to left to right, wavelength is 2. Each wave is a half a sin()
+
+      for( int c=0; c<CHIP_COUNT; c++ ) {
+
+        // Represent the pixels in polar cooridinates at radius 1
+        // Rotate the pixel into position on the board, plus the addisional angle for the wave rotation
+
+        // Compute the x position of the pixel Relative to the incoming wave (it is coming left to right on the x axis)
+        // This x will be -1 to 1
+        
+        float x= sin( 
+          2 * PI * (        
+          
+              (( (float) c ) /CHIP_COUNT)  +        // The angle of the chip around the board
+              (( (float) a ) /100)                  // add in the dynamic rotating angle
+            
+          )        
+        );
+
+        // Next compute the intensity of the wave at this location
+        // Clip at zero so we only get the positive side of the wave, the neg side will be black and be a nice break between crashing waves
+        
+        uint8_t b= max( 0 , sin( ( 2* PI * ( (w/100.0) + (x)  ))) ) * 255.0;
+
+        setRGB( c , 0 , 0 , b );
+        
+      }
+
+      delay(2);
+      
+    }
+
+  }
 
 
+  
 }

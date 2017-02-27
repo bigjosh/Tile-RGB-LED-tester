@@ -5,6 +5,9 @@
 // This would be more elegant if we could make each driver a library and you pick which one to 
 // include, but no good way to do this on Arduino....
 
+// TODO: Current gamma table is generic and the same for all colors. Need to imperically make one that matches
+//       the actual chips and driving scheme for each color. 
+
 // Number of LED chips available
 #define CHIP_COUNT 6
 
