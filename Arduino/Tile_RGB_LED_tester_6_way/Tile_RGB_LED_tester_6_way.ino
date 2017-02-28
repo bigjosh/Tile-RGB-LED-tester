@@ -13,8 +13,6 @@ void loop() {
   // put your main code here, to run repeatedly:
 
 
-  
-
   setAllRGB(0,0,0);     // CLS
     
   // Flip though fundemental colors, full screen,  1 seconds each
@@ -132,15 +130,22 @@ void loop() {
     setAllRGB( b , b , b );
     delay(2);
   }
-  
-// Rotating blue wave effect
 
-  for( int a=0; a<100; a+=1 ) {     // Angle though 100 steps
 
-    for( int w=0; w<100; w++) {   // Steps in each Wave 
+  // Rotating blue wave effect
 
-      // Imagine the wave going to left to right, wavelength is 2. Each wave is a half a sin()
+  float rotatedAngle=0;             // Current rotated angle
 
+  const int waveSteps = 100;        // Number of steps to take when passing the wave acorss the board for each angle step. 
+
+  const int cycle_count = 10;      // Number of waves to cycle to get all the way round
+
+  for( int a=0; a<cycle_count; a++ ) {     // Rotate wave aproach angle though 100 steps around 
+
+    for( int w=0; w<waveSteps; w++) {     // Steps in each Wave cycle
+
+      // Imagine the wave is always going to left to right (across X values), wavelength is 2 units. The pixles are all 1 unit from the center.
+      
       for( int c=0; c<CHIP_COUNT; c++ ) {
 
         // Represent the pixels in polar cooridinates at radius 1
@@ -150,29 +155,49 @@ void loop() {
         // This x will be -1 to 1
         
         float x= sin( 
-          2 * PI * (        
           
-              (( (float) c ) /CHIP_COUNT)  +        // The angle of the chip around the board
-              (( (float) a ) /100)                  // add in the dynamic rotating angle
-            
+          2.0 * PI * (        
+          
+              (( (float) c ) /CHIP_COUNT)          // The angle of the chip around the board - when CHIP_COUNT is 6, then this ends up being every 30 degrees
+                                    
           )        
+
+          +rotatedAngle                        // add in the dynamic rotating angle
+
         );
 
-        // Next compute the intensity of the wave at this location
-        // Clip at zero so we only get the positive side of the wave, the neg side will be black and be a nice break between crashing waves
+        // Next compute the intensity of the wave at this X location (y doesn't matter since this is a planar wavefront)
         
-        uint8_t b= max( 0 , sin( ( 2* PI * ( (w/100.0) + (x)  ))) ) * 255.0;
+        uint8_t b=  (
+          
+          -1.0 * cos( 
+            
+              ( 
+                 2* PI *     // flip the COS so we start a -1 rather than 1 (we will later adjust up 1 so we start a 0 and peak at 2)
+
+                  ( ((float) w )/ waveSteps )       // This is the actual moving wave value at x=0
+
+              ) +x 
+
+          )
+
+          +1                                      // Normalize from [-1 to 1] to [0 to 2]. 
+          
+        ) * 127.0;   // Bring into our 8-bit color space
 
         setRGB( c , 0 , 0 , b );
         
       }
 
-      delay(2);
+
+      delay(10);
+
+      rotatedAngle += ( 2.0 * PI ) / ( 1.0 * waveSteps * cycle_count);
       
     }
 
   }
 
-
+  
   
 }

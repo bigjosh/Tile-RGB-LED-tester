@@ -7,7 +7,7 @@
 // The software uses Timer1 to drive the RGB pins with a PWM signal generated in hardware.
 // On each PWM cycle, the select is advanced to the next pin to mulitplex refresh all the chips at about 100Hz.
 
-// The selected pins can be changed pretty easily, but the R,R, and B pins are tied to the OC1x timer outputs so can not be moved to other pins.
+// The selected pins can be changed pretty easily, but the R,G, and B pins are tied to the OC1x timer outputs so can not be moved to other pins.
 // This straegy depends on Timer1 having 3 output compare registers so would need to be changed to work on other chips that have fewer.
 
 // Note that it seems like I need to push the reset button on my Arduino Micro to get it to accept a program download.
