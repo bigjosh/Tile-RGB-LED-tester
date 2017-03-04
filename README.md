@@ -11,9 +11,12 @@ A board for testing RGB LEDs on the Move32 [tile platorm](https://www.media.mit.
 
 ###Video!
 
-Here is the latest 6-LED tester in action!
+Here is the latest 6-LED tester in action:
 
 https://www.youtube.com/watch?v=pqBiF4joLiI
+
+
+Old, hokey 3 LED version:
 
 ![alt text](2017-02-06%2015.04.12.jpg)
 
