@@ -16,6 +16,11 @@ A board for testing RGB LEDs on the Move32 [tile platorm](https://www.media.mit.
 * Runs on 5V supply- a boost inductor will be needed for green and blue ot run off 3V 
 * Button is in wrong orientation (I had 50% shot!) so doesn't work 
 
+###Video!
+
+Here is the latest 6-LED tester in action!
+https://www.youtube.com/watch?v=pqBiF4joLiI
+
 ![alt text](2017-02-06%2015.04.12.jpg)
 
 
