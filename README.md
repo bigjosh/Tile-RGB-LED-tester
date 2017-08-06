@@ -1,5 +1,5 @@
 # Tile-RGB-LED-tester
-A board for testing RGB LEDs on the Move32 [tile platorm](https://www.media.mit.edu/projects/automatiles/overview/).
+A board for testing RGB LEDs on the [Move38](http://www.move38.com) [tile platorm](https://www.media.mit.edu/projects/automatiles/overview/).
 
 ###Features
 * Each LED gets an independant full 24 bit RGB color
